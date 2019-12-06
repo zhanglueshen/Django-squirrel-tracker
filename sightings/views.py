@@ -27,4 +27,14 @@ def detail(request, squirrel_id):
                 data.save()
         return redirect('/sightings/sightings/')
     return render(request, 'sightings/detail.html', {'data':data})
+
+def add(request):
+    if request.method == "POST":
+        form = SquirrelForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("/sightings/sightings/")
+    else:
+        form = SquirrelForm()
+    return render(request, 'sightings/add.html', {'form':form})
 # Create your views here.                                                           
