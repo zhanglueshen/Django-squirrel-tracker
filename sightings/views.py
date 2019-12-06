@@ -6,7 +6,7 @@ from django.db.models import Count, Q
 from .models import Squirrel
 
 def home(request):
-    return render(request, 'squirrel/home.html')
+    return render(request, 'sightings/home.html')
 
 def sightings(request):
     squirrel_id = list()
@@ -14,7 +14,7 @@ def sightings(request):
         i_dict = {}
         i_dict['sid']=i.squirrel_id
         squirrel_id.append(i_dict)
-    return render(request, 'squirrel/sightings.html', {'squirrel_id':squirrel_id})
+    return render(request, 'sightings/sightings.html', {'squirrel_id':squirrel_id})
 
 def detail(request, squirrel_id):
     data = Squirrel.objects.get(squirrel_id=squirrel_id)
@@ -25,6 +25,6 @@ def detail(request, squirrel_id):
             data = SquirrelForm(instance=data,data=request.POST)
             if data.is_valid():
                 data.save()
-        return redirect('/squirrel/sightings/')
-    return render(request, 'squirrel/detail.html', {'data':data})
+        return redirect('/sightings/sightings/')
+    return render(request, 'sightings/detail.html', {'data':data})
 # Create your views here.                                                           
