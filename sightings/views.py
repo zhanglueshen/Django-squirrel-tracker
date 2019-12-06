@@ -4,6 +4,7 @@ from django.template import loader
 from django.db.models import Count, Q
 
 from .models import Squirrel
+from .forms import SquirrelForm
 
 def home(request):
     return render(request, 'sightings/home.html')
