@@ -7,6 +7,8 @@
 <h2>{{ data.squirrel_id }}</h2>
 <form action="" method="post">
 {% csrf_token %}
+  <p><input type="submit" name="update" value="Update"></p>
+  <p><input type="submit" name="delete" value="Delete"></p>
   <p>Latitude: <input type="text" name="latitude" value={{ data.latitude }}></p>  
   <p>Longitude: <input type="text" name="longitude" value={{ data.longitude }}></p>
   <p>Unique Squirrel ID: <input type="text" name="squirrel_id" value={{ data.squirrel_id }}></p>
@@ -100,8 +102,6 @@
     <option value=True {% if data.runs_from == True %} selected="selected" {% endif %}>True</option>
     <option value=False {% if data.runs_from == False %} selected="selected" {% endif %}>False</option>
   </select></p>
-  <p><input type="submit" name="update" value="Update"></p>
-  <p><input type="submit" name="delete" value="Delete"></p>
 </form>
 </body>
 </html>
