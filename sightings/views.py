@@ -38,4 +38,20 @@ def add(request):
     else:
         form = SquirrelForm()
     return render(request, 'sightings/add.html', {'form':form})
+
+def stats(request):
+        dataset = Squirrel.objects \
+        .values('sq') \
+            .annotate(running_count=Count('sq', filter=Q(running=True)),
+                not_running_count=Count('sq', filter=Q(running=False)),
+                chasing_count=Count('sq', filter=Q(chasing=True)),
+                not_chasing_count=Count('sq', filter=Q(chasing=False)),
+                climbing_count=Count('sq', filter=Q(climbing=True)),
+                not_climbing_count=Count('sq', filter=Q(climbing=False)),
+                eating_count=Count('sq', filter=Q(eating=True)),
+                not_eating_count=Count('sq', filter=Q(eating=False)),
+                foraging_count=Count('sq', filter=Q(foraging=True)),
+                not_foraging_count=Count('sq', filter=Q(foraging=False))) \
+        .order_by('sq')
+    return render(request, 'sightings/stats.html', {'dataset': dataset})
 # Create your views here.                                                           
