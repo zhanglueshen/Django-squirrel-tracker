@@ -40,12 +40,18 @@ def add(request):
     return render(request, 'sightings/add.html', {'form':form})
 
 def stats(request):
-    sq_data=Squirrel.objects.all()
-    a=len(sq_data)
-    b=sq_data.aggregate(min_latitude=Min('latitude'),max_latitude=Max('latitude'),average_latitude=Avg('latitude'))
-    c=sq_data.aggregate(min_longitude=Min('longitude'),max_longitude=Max('longitude'),average_longitude=Avg('longitude'))
-    d=list(sq_data.values_list('shift').annotate(Count('shift')))
-    e=list(sq_data.values_list('age').annotate(Count('age')))
-    f=list(sq_data.values_list('primary_fur_color').annotate(Count('primary_fur_color')))
-    return render(request, 'sightings/stats.html', {"a":a,"b":b,"c":c,"d":d,"e":e,"f":f})
+        dataset = Squirrel.objects \
+        .values('sq') \
+            .annotate(running_count=Count('sq', filter=Q(running=True)),
+                not_running_count=Count('sq', filter=Q(running=False)),
+                chasing_count=Count('sq', filter=Q(chasing=True)),
+                not_chasing_count=Count('sq', filter=Q(chasing=False)),
+                climbing_count=Count('sq', filter=Q(climbing=True)),
+                not_climbing_count=Count('sq', filter=Q(climbing=False)),
+                eating_count=Count('sq', filter=Q(eating=True)),
+                not_eating_count=Count('sq', filter=Q(eating=False)),
+                foraging_count=Count('sq', filter=Q(foraging=True)),
+                not_foraging_count=Count('sq', filter=Q(foraging=False))) \
+        .order_by('sq')
+    return render(request, 'sightings/stats.html', {'dataset': dataset})
 # Create your views here.                                                           
