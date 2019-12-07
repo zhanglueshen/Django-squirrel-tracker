@@ -1,28 +1,28 @@
-<html>
-<body>
+<!DOCTYPE html>
+<html lang="en">
+  
+  <head>
+    <meta charset="UTF-8">
+    <title>stats of squirrel  sightings</title></head>
+  
+  <body>
+    <h2>Statistics of sightings data of squirrels</h2>
+    <ul style="list-style-type:square;">
+      <li>Total number of sightings: {{a}}</li>
+      <br>
+      <li>Latitiude：min-{{b.min_latitude}}</li>
+      <li>Latitiude：max-{{b.max_latitude}}</li>
+      <li>Latitiude：average-{{b.average_latitude}}</li>
+      <br>
+      <li>longitude：min-{{c.min_longitude}}</li>
+      <li>longitude：max-{{c.max_longitude}}</li>
+      <li>longitude：average-{{c.average_longitude}}</li>
+      <br>
+      <li>shift: {{d}}</li>
+      <br>
+      <li>age: {{e}}</li>
+      <br>
+      <li>primary_fur_color: {{f}}</li></ul>
+  </body>
 
-<h2>Display 5 attributes</h2>
-
-<table style="width:100%">
-  <tr>
-    <th>Squirrel_ID</th>
-    <th>Shift</th>
-    <th>Age</th>
-    <th>Color</th>
-    <th>Running</th>
-    <th>Chasing</th>
-  </tr>
-  {% for item in squirreldata %}
-  <tr>
-    <td>{{item.Squirrel_ID}}</td>
-    <th>{{item.Shift}}</th>
-    <th>{{item.Age}}</th>
-    <th>{{item.Color}}</th>
-    <th>{{item.Running}}</th>
-    <th>{{item.Chasing}}</th>
-  </tr>
-  {% endfor %}
-</table>
-
-</body>
 </html>

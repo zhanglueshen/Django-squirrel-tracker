@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.template import loader
-from django.db.models import Count, Q
+from django.db.models import Count, Q, Avg, Max, Min, Count
 
 from .models import Squirrel
 from .forms import SquirrelForm
@@ -18,18 +18,19 @@ def sightings(request):
     return render(request, 'sightings/sightings.html', {'squirrel_id':squirrel_id})
 
 def edit(request, squirrel_id):
-	squirrel = Squirrel.objects.get(squirrel_ID=squirrel_id)
+	squirrel = Squirrel.objects.get(squirrel_id=squirrel_id)
 	if request.method=='Post':
 		form = SquirrelForm(request.POST, instance=squirrel)
 		if form.is_valid():
 			form.save()
-			return redirect(f'/sightings/{squirrel_id}')
+			return redirect(f'/sighting/{squirrel_id}')
 	else:
 		form = SquirrelForm(instance=squirrel)
 	context ={
 		'form':form
 			}
 	return render(request, 'sightings/edit.html', context)
+
 
 def add(request):
     if request.method == 'POST':
@@ -47,8 +48,13 @@ def add(request):
     return render(request, 'sightings/add.html', context)
 
 def stats(request):
-	squirreldata = Squirrel.objects.all()
-	context = {'squirreldata': squirreldata}
-	return render(request, 'sighting/stats.html', context)
+    sq_data=Squirrel.objects.all()
+    a=len(sq_data)
+    b=sq_data.aggregate(min_latitude=Min('latitude'),max_latitude=Max('latitude'),average_latitude=Avg('latitude'))
+    c=sq_data.aggregate(min_longitude=Min('longitude'),max_longitude=Max('longitude'),average_longitude=Avg('longitude'))
+    d=list(sq_data.values_list('shift').annotate(Count('shift')))
+    e=list(sq_data.values_list('age').annotate(Count('age')))
+    f=list(sq_data.values_list('color').annotate(Count('color')))
+    return render(request, 'sightings/stats.html', {"a":a,"b":b,"c":c,"d":d,"e":e,"f":f})
 
 # Create your views here.                                                           
