@@ -17,17 +17,19 @@ def sightings(request):
         squirrel_id.append(i_dict)
     return render(request, 'sightings/sightings.html', {'squirrel_id':squirrel_id})
 
-def detail(request, squirrel_id):
-    data = Squirrel.objects.get(squirrel_id=squirrel_id)
-    if request.method == "POST":
-        if 'delete' in request.POST:
-            data.delete()
-        else:
-            data = SquirrelForm(instance=data,data=request.POST)
-            if data.is_valid():
-                data.save()
-        return redirect('/sightings/sightings/')
-    return render(request, 'sightings/detail.html', {'data':data})
+def edit(request, squirrel_id):
+	squirrel = Squirrel.objects.get(squirrel_ID=squirrel_id)
+	if request.method=='Post':
+		form = SquirrelForm(request.POST, instance=squirrel)
+		if form.is_valid():
+			form.save()
+			return redirect(f'/sightings/{squirrel_id}')
+	else:
+		form = SquirrelForm(instance=squirrel)
+	context ={
+		'form':form
+			}
+	return render(request, 'sightings/edit.html', context)
 
 def add(request):
     if request.method == 'POST':
