@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.template import loader
+from django.views.generic.edit import CreateView
 from django.db.models import Count, Q, Avg, Max, Min, Count
 
 from .models import Squirrel
@@ -48,14 +49,19 @@ def add(request):
     return render(request, 'sightings/add.html', context)
 
 def stats(request):
-    sq_data=Squirrel.objects.all()
-    a=len(sq_data)
-    b=sq_data.aggregate(min_latitude=Min('latitude'),max_latitude=Max('latitude'),average_latitude=Avg('latitude'))
-    c=sq_data.aggregate(min_longitude=Min('longitude'),max_longitude=Max('longitude'),average_longitude=Avg('longitude'))
-    d=list(sq_data.values_list('shift').annotate(Count('shift')))
-    e=list(sq_data.values_list('age').annotate(Count('age')))
-    f=list(sq_data.values_list('color').annotate(Count('color')))
-    return render(request, 'sightings/stats.html', {"a":a,"b":b,"c":c,"d":d,"e":e,"f":f})
+    sightings_stats1=Squirrel.objects.all().count()
+    sightings_stats2=Squirrel.objects.filter(shift='AM').count()
+    sightings_stats3=Squirrel.objects.filter(shift='PM').count()
+    sightings_stats4=Squirrel.objects.filter(age='Adult').count()
+    sightings_stats5=Squirrel.objects.filter(age='Juvenile').count()
+    context={'sightings_stats1':sightings_stats1,
+            'sightings_stats2':sightings_stats2,
+            'sightings_stats3':sightings_stats3,
+            'sightings_stats3':sightings_stats3,
+            'sightings_stats4':sightings_stats4,
+            'sightings_stats5':sightings_stats5,
+            }
+    return render(request, 'sightings/stats.html', context)
 
 def map(request):
     sightings = Squirrel.objects.all()[:100]

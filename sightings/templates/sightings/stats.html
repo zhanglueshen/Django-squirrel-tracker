@@ -1,28 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
-  
-  <head>
-    <meta charset="UTF-8">
-    <title>stats of squirrel  sightings</title></head>
-  
-  <body>
-    <h2>Statistics of sightings data of squirrels</h2>
-    <ul style="list-style-type:square;">
-      <li>Total number of sightings: {{a}}</li>
-      <br>
-      <li>Latitiude：min-{{b.min_latitude}}</li>
-      <li>Latitiude：max-{{b.max_latitude}}</li>
-      <li>Latitiude：average-{{b.average_latitude}}</li>
-      <br>
-      <li>longitude：min-{{c.min_longitude}}</li>
-      <li>longitude：max-{{c.max_longitude}}</li>
-      <li>longitude：average-{{c.average_longitude}}</li>
-      <br>
-      <li>shift: {{d}}</li>
-      <br>
-      <li>age: {{e}}</li>
-      <br>
-      <li>primary_fur_color: {{f}}</li></ul>
-  </body>
+<html>
+<head>
+	<title> SIGHTINGS STATS </title> 
+</head>
+<body>
+<ul> 
+	<li>The total amount of sightings is {{sightings_stats1}}</li>
+	<li>The amount of AM squirrel sightings is {{sightings_stats2}}</li>
+	<li>The amount of PM squirrel sightings is {{sightings_stats3}}</li>
+	<li>The amount of adult squirrels is {{sightings_stats4}}</li>
+	<li>The amount of juvenile squirrels is {{sightings_stats5}}</li>
+</ul>
 
+</body>
 </html>
