@@ -57,4 +57,8 @@ def stats(request):
     f=list(sq_data.values_list('color').annotate(Count('color')))
     return render(request, 'sightings/stats.html', {"a":a,"b":b,"c":c,"d":d,"e":e,"f":f})
 
+def map(request):
+    sightings = Squirrel.objects.all()[:100]
+    return render(request, 'sightings/map.html', {'sightings':sightings})
+
 # Create your views here.                                                           
