@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.template import loader
 from django.db.models import Count, Q, Avg, Max, Min, Count
@@ -18,7 +18,7 @@ def sightings(request):
     return render(request, 'sightings/sightings.html', {'squirrel_id':squirrel_id})
 
 def edit(request, squirrel_id):
-	squirrel = Squirrel.objects.get(squirrel_id=squirrel_id)
+	squirrel = get_object_or_404(Squirrel,squirrel_id=squirrel_id)
 	if request.method=='Post':
 		form = SquirrelForm(request.POST, instance=squirrel)
 		if form.is_valid():
