@@ -1,16 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-  
-  <head>
-    <meta charset="UTF-8">
-    <title>Add a new squirrel</title></head>
-  
-  <body>
-	  <h2> Add a new squirrel data </h2>
-    <form action="" method="post">{% csrf_token %}
-      <table>{{ form }}</table>
-      <br>
-      <input type="submit" value="submit"></form>
-  </body>
 
-</html>
+<!doctype html>
+
+<html lang="en">
+<head>
+<title>Add Squirrel</title>
+</head>
+
+    <body>
+	    <h2>Add Squirrel</h2>
+        <form method = 'POST'>
+        	{% csrf_token %}
+
+                {{ form.as_p }}
+		<br>
+	        <input type='submit' name='add'>
+	</form>
+    </body>
+</html>    
