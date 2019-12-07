@@ -1,55 +1,16 @@
+<!DOCTYPE html>
 <html>
-    <head>
-        <style>
-        .header {
-            padding: 60px;
-            text-align: center;
-            background: #eea29a;
-            color: white;
-            font-size: 30px;
-        }
-        h1 { color: #FFFFFF; font-family: 'Helvetica Neue', sans-serif; font-size: 275px; font-weight: bold; letter-spacing: -1px; line-height: 1; text-align: center; }
-        h3 { color: #FFFFFF; font-family: 'Open Sans', sans-serif; font-size: 30px; font-weight: 300; line-height: 32px; margin: 0 0 72px; text-align: center; }
-        .button {
-            background-color: #eea29a;
-            border: none;
-            color: white;
-            padding: 15px 32px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin: 4px 2px;
-            cursor: pointer;
-        }
-        </style>
-    </head>
-    <body>
-        <header class='header'>
-            <h1>Squirrel</h1>
-            <h3>Display statistics for 5 chosen attributes</h3>
-        </header>
+<head>
+	<title> SIGHTINGS STATS </title> 
+</head>
+<body>
+<ul> 
+	<li>The total amount of sightings is {{sightings_stats1}}</li>
+	<li>The amount of AM squirrel sightings is {{sightings_stats2}}</li>
+	<li>The amount of PM squirrel sightings is {{sightings_stats3}}</li>
+	<li>The amount of adult squirrels is {{sightings_stats4}}</li>
+	<li>The amount of juvenile squirrels is {{sightings_stats5}}</li>
+</ul>
 
-
-        <main>
-        	<li>Total number of sightings: {{a}}</li>
-      		<br>
-      		<li>Latitiude：min-{{b.min_latitude}}</li>
-      		<li>Latitiude：max-{{b.max_latitude}}</li>
-      		<li>Latitiude：average-{{b.average_latitude}}</li>
-      		<br>
-      		<li>longitude：min-{{c.min_longitude}}</li>
-      		<li>longitude：max-{{c.max_longitude}}</li>
-      		<li>longitude：average-{{c.average_longitude}}</li>
-      		<br>
-      		<li>shift: {{d}}</li>
-      		<br>
-     		<li>age: {{e}}</li>
-      		<br>
-      		<li>primary_fur_color: {{f}}</li></ul>
-    	</main>
-
-
-
-    </body>
+</body>
 </html>

@@ -49,11 +49,19 @@ def add(request):
     return render(request, 'sightings/add.html', context)
 
 def stats(request):
-	squirrels = Squirrel.objects.all()
-	lattitude = squirrels.aggregate(min_latitude=Min('latitude'),max_latitude=Max('latitude'))
-	longitude = squirrels.aggregate(min_latitude=Min('latitude'),max_latitude=Max('latitude'))
-	context = {'squirrels': squirrels}
-	return render(request, 'sighting/stats.html', context)
+    sightings_stats1=Squirrel.objects.all().count()
+    sightings_stats2=Squirrel.objects.filter(shift='AM').count()
+    sightings_stats3=Squirrel.objects.filter(shift='PM').count()
+    sightings_stats4=Squirrel.objects.filter(age='Adult').count()
+    sightings_stats5=Squirrel.objects.filter(age='Juvenile').count()
+    context={'sightings_stats1':sightings_stats1,
+            'sightings_stats2':sightings_stats2,
+            'sightings_stats3':sightings_stats3,
+            'sightings_stats3':sightings_stats3,
+            'sightings_stats4':sightings_stats4,
+            'sightings_stats5':sightings_stats5,
+            }
+    return render(request, 'sightings/stats.html', context)
 
 def map(request):
     sightings = Squirrel.objects.all()[:100]
